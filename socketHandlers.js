@@ -23,7 +23,7 @@ console.log("Peer is ready");});
 socket.on('joinRoom',(data)=>{
   socket.join(data.roomId);
  console.log(data);
-   socket.to(data.roomId).emit('user-joined', { socketId: socket.id });
+   socket.to(data.roomId).emit('user-joined', { socketId: socket.id,Name:data.name });
 });
 socket.on('offer',({ offer, RoomId })=>{
   socket.to(RoomId).emit('offer', { offer });
@@ -35,7 +35,12 @@ socket.on("answer",(data)=>{
 });
 socket.on("ice-candidate", (data) => {
   socket.to(data.RoomId).emit("ice-candidate", { candidate: data.candidate });
-console.log("ICE candidate received:");
+// console.log("ICE candidate received:");
+});
+
+socket.on("hangup", ({ RoomId }) => {
+  socket.to(RoomId).emit("hangup", { socketId: socket.id });
+  console.log("Hangup signal sent to room:", RoomId);
 });
 }
 module.exports = { handleSocketConnection }; 

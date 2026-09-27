@@ -17,9 +17,10 @@ socket.on('createRoom',()=>{
   socket.emit('room-created',{roomId});
 });
 //Ready State
-socket.on('peer-ready', () => {
-
-console.log("Peer is ready");});
+socket.on('peer-ready', ({ RoomId }) => {
+socket.to(RoomId).emit('peer-ready', { socketId: socket.id });
+console.log("Peer is ready");
+});
 socket.on('joinRoom',(data)=>{
   socket.join(data.roomId);
  console.log(data);

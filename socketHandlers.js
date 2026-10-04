@@ -4,13 +4,7 @@ function generateUniqueId() {
   return crypto.randomBytes(8).toString('hex');  
 }
 function handleSocketConnection(socket,io) {
-  const Room={
-   creatorSocketId: "socket-A",
-  participants: [
-    { socketId: null, ready: true },
-    { socketId: null, ready: false },
-  ]
-  }
+ 
 socket.on('createRoom',()=>{
   const roomId = generateUniqueId();
   socket.join(roomId);

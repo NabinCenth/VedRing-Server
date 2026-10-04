@@ -16,7 +16,7 @@ const io = new Server(server, {
      "http://localhost:5000",
      "http://192.168.1.71:5173",
      "http://192.168.137.1:5173",
-    "https://vedmeet.netlify.app"] },
+    "https://vedring.netlify.app/"] },
 });
 io.on("connection", (socket) => {
   console.log("User connected", socket.id);
